@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant User        
+    participant Browser
+    participant Server
+
+    User->>Browser: https://studies.cs.helsinki.fi/exampleapp/spa
+    
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    Server->>Browser: HTML Document
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    Server->>Browser: CSS File
+    Server->>Browser: JavaScript File
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    Server->>Browser: JSON File
+    Browser->>User: Page SPA Complete
+
+    User->>Browser: { notes: this is a new note }
+    User->>Browser: Click on Save
+    
+    Note left of Browser: The Browser execute JavaScript for send the new note
+
+    Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa (JSON)
+    Server->>Browser: HTTP 201 Created 
+    
+    Browser->>User: Page SPA Complete with the new note

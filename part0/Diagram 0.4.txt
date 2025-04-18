@@ -1,0 +1,60 @@
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: https://studies.cs.helsinki.fi/exampleapp/notes 
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate Server
+    Server->>Browser: HTML Document
+    deactivate Server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server->>Browser: CSS File
+    deactivate Server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Server
+    Server->>Browser: JavaScript File
+    deactivate Server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server->>Browser: JSON File with data
+    deactivate Server
+
+    Browser->>User: Notes Page Complete
+
+    Note right of User: Now the User can see the page and complete the form.
+
+    User->>Browser: { Note: "This is my new note" }
+    User->>Browser: { Click on Save }
+
+    Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of Server: The server read the petition and save the new note.
+
+    Server->>Browser: Redirect HTTP 302 https://studies.cs.helsinki.fi/exampleapp/notes
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate Server
+    Server->>Browser: HTML Document
+    deactivate Server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server->>Browser: CSS File
+    deactivate Server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Server
+    Server->>Browser: JavaScript File
+    deactivate Server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server->>Browser: JSON File with data
+    deactivate Server
+
+    Browser->>User: Notes Page Complete Update with the new note
